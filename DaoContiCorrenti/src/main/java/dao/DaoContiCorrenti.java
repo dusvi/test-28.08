@@ -11,6 +11,15 @@ import java.util.List;
 import java.util.Properties;
 
 public class DaoContiCorrenti implements IDao<ContoCorrente,String>{
+	private static IDao<ContoCorrente,String> dao;
+	private DaoContiCorrenti(){}
+
+	public static IDao<ContoCorrente,String> getInstance(){
+		if(dao==null){
+			dao=new DaoContiCorrenti();
+		}
+		return dao;
+	}
 	private static final String QUERY_JOIN="select * from conti left join clienti on(conti.proprietario=clienti.codFiscale)";
 
 	private static final String URL="URL";
@@ -46,24 +55,32 @@ public class DaoContiCorrenti implements IDao<ContoCorrente,String>{
 		return c;
 	}
 	public int create(ContoCorrente element) throws DaoException{
+		int result;
 		try(Connection c=connect()){
-			PreparedStatement stmt=c.prepareStatement("insert into conti(numeroConto,proprietario,abi,cab,cin,saldo) values(?,?,?,?,?,0)");
+			PreparedStatement stmt=c.prepareStatement("replace into clienti(codFiscale,nome,cognome) values(?,?,?);");
+			stmt.setString(1,element.getCodFiscaleTitolare());
+			stmt.setString(2,element.getNomeTitolare());
+			stmt.setString(3,element.getCognomeTitolare());
+			stmt.executeUpdate();
+			stmt=c.prepareStatement("insert into conti(numeroConto,proprietario,abi,cab,cin,saldo) values(?,?,?,?,?,0);");
 			stmt.setString(1,element.getNumeroConto());
 			stmt.setString(2,element.getCodFiscaleTitolare());
 			stmt.setString(3,element.getAbi());
 			stmt.setString(4,element.getCab());
 			stmt.setString(5,String.valueOf(element.getCin()));
-			return stmt.executeUpdate();
+			result=stmt.executeUpdate();
 		}catch(SQLException e){
 			throw new DaoException("Errore metodo create");
 		}
+		return result;
 	}
 
 	public List<ContoCorrente> ricercaPerCognome(String cognome) throws DaoException{
-		List<ContoCorrente> result=new ArrayList<>();
+		List<ContoCorrente> result=null;
 		try(Connection c=connect()){
 			Statement stmt=c.createStatement();
 			ResultSet rs=stmt.executeQuery(QUERY_JOIN+" where cognome='"+cognome+"';");
+			result=new ArrayList<>();
 			while(rs.next()){
 				ContoCorrente conto=new ContoCorrente(rs.getString("numeroConto"),rs.getString("abi"),rs.getString("cab"),rs.getString("cin").toCharArray()[0],rs.getString("nome"),rs.getString("cognome"),rs.getString("proprietario"),rs.getDouble("saldo"));
 				result.add(conto);
@@ -75,7 +92,7 @@ public class DaoContiCorrenti implements IDao<ContoCorrente,String>{
 	}
 
 	public ContoCorrente ricercaPerCodFiscale(String codFiscale) throws DaoException{
-		ContoCorrente result=null;
+		ContoCorrente result=new ContoCorrente("","","",'0',"","","",-1);
 		try(Connection c=connect()){
 			Statement stmt=c.createStatement();
 			ResultSet rs=stmt.executeQuery(QUERY_JOIN+" where proprietario='"+codFiscale+"';");

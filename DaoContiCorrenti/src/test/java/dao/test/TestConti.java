@@ -25,7 +25,7 @@ import java.util.Properties;
  */
 public class TestConti
 {
-    private static final IDao<ContoCorrente,String> dao=new DaoContiCorrenti();
+    private static final IDao<ContoCorrente,String> dao=DaoContiCorrenti.getInstance();
     private static final String URL="URL";
     private static final String USERNAME="USERNAME";
     private static final String PASSWORD="PASSWORD";

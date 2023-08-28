@@ -1,0 +1,93 @@
+{
+	"info": {
+		"_postman_id": "981f2558-7ce3-43af-a5aa-475b877d74e8",
+		"name": "RSConti",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27993127"
+	},
+	"item": [
+		{
+			"name": "creaConto",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"numeroConto\":\"111111111111\",\r\n\"abi\":\"00000\",\r\n\"cab\":\"00000\",\r\n\"cin\":\"i\",\r\n\"nomeTitolare\":\"H\",\r\n\"cognomeTitolare\":\"Smith\",\r\n\"codFiscaleTitolare\":\"AAAAAX11A11A111A\",\r\n\"saldo\":0}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/RSContiCorrenti/conti",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"RSContiCorrenti",
+						"conti"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ricercaPerCodFiscale",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/RSContiCorrenti/conti/codFiscale?value=AAAAAE11A01A111A",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"RSContiCorrenti",
+						"conti",
+						"codFiscale"
+					],
+					"query": [
+						{
+							"key": "value",
+							"value": "AAAAAE11A01A111A"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ricercaPerCognome",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/RSContiCorrenti/conti/codFiscale?value=AAAAAE11A01A111A",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"RSContiCorrenti",
+						"conti",
+						"codFiscale"
+					],
+					"query": [
+						{
+							"key": "value",
+							"value": "AAAAAE11A01A111A"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

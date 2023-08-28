@@ -11,6 +11,7 @@ public class ContoCorrente{
 	private String cognomeTitolare;
 	private String codFiscaleTitolare;
 	private double saldo;
+	public ContoCorrente(){}
 
 
 	public ContoCorrente(String numeroConto,String abi,String cab,char cin,String nomeTitolare,String cognomeTitolare,String codFiscaleTitolare,double saldo){
@@ -82,6 +83,10 @@ public class ContoCorrente{
 
 	public double getSaldo(){
 		return saldo;
+	}
+
+	public void setSaldo(double saldo){
+		this.saldo=saldo;
 	}
 
 	public void versa(double diff){
