@@ -98,7 +98,7 @@ public class ContoCorrente{
 		if(!(o instanceof ContoCorrente))
 			return false;
 		ContoCorrente that=(ContoCorrente)o;
-		return numeroConto==that.numeroConto && abi==that.abi && cab==that.cab && cin==that.cin && codFiscaleTitolare.equals(that.codFiscaleTitolare);
+		return numeroConto.equals(that.numeroConto) && abi.equals(that.abi) && cab.equals(that.cab) && cin==that.cin && codFiscaleTitolare.equals(that.codFiscaleTitolare);
 	}
 
 }

@@ -11,6 +11,6 @@ proprietario varchar(16) unique not null,
 abi varchar(5) not null,
 cab varchar(5) not null,
 cin char not null,
-saldo bigint not null,
+saldo double not null,
 foreign key(proprietario) references clienti(codFiscale)
 );
