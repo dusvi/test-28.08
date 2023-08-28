@@ -1,6 +1,7 @@
-package it.corso.alfasoft.test;
+package dao.test;
 
 import dao.DaoContiCorrenti;
+import dao.IDao;
 import dto.ContoCorrente;
 import exception.DaoException;
 
@@ -24,7 +25,7 @@ import java.util.Properties;
  */
 public class TestConti
 {
-    private static final DaoContiCorrenti dao=new DaoContiCorrenti();
+    private static final IDao<ContoCorrente,String> dao=new DaoContiCorrenti();
     private static final String URL="URL";
     private static final String USERNAME="USERNAME";
     private static final String PASSWORD="PASSWORD";

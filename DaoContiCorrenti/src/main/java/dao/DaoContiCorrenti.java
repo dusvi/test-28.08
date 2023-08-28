@@ -9,7 +9,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import java.util.logging.Logger;
 
 public class DaoContiCorrenti implements IDao<ContoCorrente,String>{
 	private static final String QUERY_JOIN="select * from conti left join clienti on(conti.proprietario=clienti.codFiscale)";
